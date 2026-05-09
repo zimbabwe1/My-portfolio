@@ -1,100 +1,146 @@
+// DOM Elements
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const navItems = document.querySelectorAll('.nav-links a');
-const revealElements = document.querySelectorAll('.reveal');
-const statNumbers = document.querySelectorAll('.stat-number');
 const contactForm = document.querySelector('.contact-form');
-const topbar = document.querySelector('.topbar');
+const statNumbers = document.querySelectorAll('.stat-number');
 
-const toggleMenu = () => {
-  navLinks.classList.toggle('active');
-};
+// Mobile Menu Toggle
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+}
 
-const closeMenu = () => {
-  navLinks.classList.remove('active');
-};
+// Close menu when nav item clicked
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
 
-const setActiveNav = () => {
-  const scrollPosition = window.scrollY + window.innerHeight / 3;
-  document.querySelectorAll('section[id]').forEach((section) => {
+// Active nav link on scroll
+const highlightNavItem = () => {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollPosition = window.scrollY + 100;
+
+  sections.forEach(section => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
-    const id = section.getAttribute('id');
-    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    const sectionId = section.getAttribute('id');
+    const navItem = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
 
-    if (link) {
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        navItems.forEach((item) => item.classList.remove('active'));
-        link.classList.add('active');
-      }
+    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+      navItems.forEach(item => item.classList.remove('active'));
+      if (navItem) navItem.classList.add('active');
     }
   });
 };
 
-const revealObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.2,
-  }
-);
+window.addEventListener('scroll', highlightNavItem);
 
-revealElements.forEach((el) => revealObserver.observe(el));
+// Counter Animation
+const animateCounters = () => {
+  statNumbers.forEach(stat => {
+    const target = parseInt(stat.getAttribute('data-target'));
+    const duration = 1000;
+    const increment = target / (duration / 16);
+    let current = 0;
 
-const animateStats = () => {
-  statNumbers.forEach((number) => {
-    const target = Number(number.dataset.target) || 0;
-    const duration = 1400;
-    let start = 0;
-    const stepTime = Math.max(Math.floor(duration / target), 20);
-
-    const updateNumber = () => {
-      start += 1;
-      number.textContent = start;
-      if (start < target) {
-        window.requestAnimationFrame(updateNumber);
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        stat.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
       } else {
-        number.textContent = `${target}+`;
+        stat.textContent = target;
       }
     };
 
-    if (target > 0) {
-      updateNumber();
-    }
+    // Trigger animation when element is visible
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          updateCounter();
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    observer.observe(stat);
   });
 };
 
-window.addEventListener('scroll', () => {
-  setActiveNav();
-  if (window.scrollY > 20) {
-    topbar?.classList.add('scrolled');
-  } else {
-    topbar?.classList.remove('scrolled');
-  }
-});
+animatateCounters();
 
-window.addEventListener('load', () => {
-  setActiveNav();
-  animateStats();
-});
-
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', toggleMenu);
-  navItems.forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
-}
-
+// Form Validation and Submission
 if (contactForm) {
-  contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    window.alert('Thanks! I’ll be in touch soon.');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = formData.get('name') || contactForm.querySelector('input[placeholder="Your name"]').value;
+    const email = formData.get('email') || contactForm.querySelector('input[placeholder="you@example.com"]').value;
+    const message = formData.get('message') || contactForm.querySelector('textarea').value;
+
+    // Basic validation
+    if (!name.trim()) {
+      alert('Please enter your name');
+      return;
+    }
+
+    if (!email.trim() || !isValidEmail(email)) {
+      alert('Please enter a valid email');
+      return;
+    }
+
+    if (!message.trim()) {
+      alert('Please enter a message');
+      return;
+    }
+
+    // Success message
+    alert(`Thanks ${name}! I'll get back to you soon.`);
     contactForm.reset();
   });
 }
+
+// Email validation
+function isValidEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+// Intersection Observer for reveal animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationDelay = '0s';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal').forEach(el => {
+  observer.observe(el);
+});
+
+// Smooth scroll for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Initialize
+window.addEventListener('load', () => {
+  highlightNavItem();
+});
