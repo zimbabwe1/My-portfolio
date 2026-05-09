@@ -2,7 +2,7 @@
 
 Welcome to my portfolio! This is a modern, responsive website showcasing my skills, projects, and experience as a front-end developer.
 
-## 🎨 Features
+## Features
 
 - **Responsive Design** - Optimized for desktop, tablet, and mobile devices
 - **Modern Aesthetics** - Clean, professional design with gradient backgrounds
@@ -11,7 +11,7 @@ Welcome to my portfolio! This is a modern, responsive website showcasing my skil
 - **Accessibility** - Semantic HTML and keyboard-friendly navigation
 - **Contact Form** - Easy-to-use form for getting in touch
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 My-portfolio/
@@ -21,7 +21,7 @@ My-portfolio/
 └── README.md       # This file
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone or download the repository**
    ```bash
@@ -37,7 +37,7 @@ My-portfolio/
    - Modify colors in `styles.css` (look for CSS variables in `:root`)
    - Add your real social media and GitHub links
 
-## 🎯 Sections
+## Sections
 
 ### Hero Section
 - Eye-catching headline and call-to-action buttons
@@ -65,7 +65,7 @@ My-portfolio/
 - Functional contact form
 - Social media links
 
-## 🎨 Customization
+## Customization
 
 ### Update Colors
 Edit the CSS variables in `styles.css`:
@@ -83,14 +83,14 @@ Change the gradient in `.hero-section`:
 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 ```
 
-## 📱 Responsive Breakpoints
+## Responsive Breakpoints
 
 - **Desktop**: 1200px and above
 - **Tablet**: 768px to 1199px
 - **Mobile**: Below 768px
 - **Small Mobile**: Below 480px
 
-## 🌐 Deployment
+## Deployment
 
 ### GitHub Pages (Free)
 1. Push this repo to GitHub
@@ -103,14 +103,14 @@ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 - Netlify (netlify.com)
 - Traditional web hosting
 
-## 🛠️ Browser Support
+## Browser Support
 
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
-## ✨ Features Included
+## Features Included
 
 ✅ Counter animation for stats  
 ✅ Smooth scroll navigation  
