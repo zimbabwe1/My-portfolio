@@ -1,26 +1,4 @@
 # My-portfolio
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tyrese | Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="hero-section" id="home">
-      <div class="topbar container">
-        <div class="brand">Tyrese</div>
-        <button class="menu-toggle" type="button" aria-label="Toggle navigation">Menu</button>
-        <nav class="nav-links" aria-label="Primary navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
 
       <div class="hero container">
         <div class="hero-copy reveal">
