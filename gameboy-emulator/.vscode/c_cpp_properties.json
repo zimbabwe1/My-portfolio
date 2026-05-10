@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "MinGW",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/msys64/mingw64/include",
+                "C:/msys64/mingw64/include/c++/**",
+                "C:/msys64/mingw64/include/SDL3"
+            ],
+            "defines": [],
+            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

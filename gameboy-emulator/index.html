@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Boy Emulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        canvas {
+            border: 2px solid #333;
+            background-color: #9bbc0f;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .info {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Boy Emulator</h1>
+    <canvas id="gameboy-screen" width="160" height="144"></canvas>
+    <div class="controls">
+        <button id="load-rom">Load ROM</button>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="info">
+        <p>This is a basic Game Boy emulator implemented in JavaScript.</p>
+        <p>Note: Due to browser security, ROM loading is limited. For a full experience, run locally.</p>
+    </div>
+    <input type="file" id="rom-input" style="display: none;" accept=".gb,.gbc">
+
+    <script src="gameboy.js"></script>
+</body>
+</html>

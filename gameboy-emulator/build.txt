@@ -1,0 +1,70 @@
+# Game Boy Emulator Build Instructions for Windows
+
+## Option 1: MSYS2 + MinGW (Recommended)
+# Requires MSYS2 (installed via winget) and SDL3
+
+# 1. Open MSYS2 MinGW64 terminal:
+# Start Menu -> MSYS2 -> MSYS2 MinGW x64
+
+# 2. Update package database:
+# pacman -Syu
+
+# 3. Install SDL3:
+# pacman -S mingw-w64-x86_64-SDL3
+
+# 4. Navigate to emulator directory:
+# cd "/c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator"
+
+# 5. Compile:
+# g++ -O3 main.cpp cpu.cpp memory.cpp gpu.cpp input.cpp -o gameboy.exe -lSDL3
+
+# 6. Copy SDL3.dll:
+# cp /mingw64/bin/SDL3.dll .
+
+# 7. Run:
+# ./gameboy.exe [rom.gb]
+
+## Option 2: Visual Studio (MSVC)
+
+# Prerequisites:
+# - Visual Studio 2019/2022 with C++ development workload
+# - SDL3 development libraries (download from https://github.com/libsdl-org/SDL/releases)
+
+# 1. Download SDL3 for Visual C++ from GitHub releases
+#    https://github.com/libsdl-org/SDL/releases/download/release-3.4.8/SDL3-devel-3.4.8-VC.zip
+# 2. Extract SDL3 to a folder (e.g., C:\SDL3-VC)
+
+# 3. Open Developer Command Prompt for VS:
+# Start Menu -> Visual Studio -> Developer Command Prompt
+
+# 4. Navigate to project directory:
+# cd "C:\Users\PopSo\Desktop\My-portfolio\gameboy-emulator"
+
+# 5. Set up environment (adjust paths as needed):
+# set SDL3_DIR=C:\SDL3-VC
+# set INCLUDE=%SDL3_DIR%\include;%INCLUDE%
+# set LIB=%SDL3_DIR%\lib\x64;%LIB%
+
+# 6. Compile:
+# cl /EHsc /O2 main.cpp cpu.cpp memory.cpp gpu.cpp input.cpp /Fe:gameboy.exe SDL3.lib
+
+# 7. Copy SDL3.dll to executable directory:
+# copy %SDL2_DIR%\lib\x64\SDL2.dll .
+
+# 8. Run:
+# gameboy.exe [rom.gb]
+
+## Troubleshooting Visual Studio Issues
+
+# Common problems:
+# 1. "SDL2.lib not found" - Make sure LIB environment variable includes SDL2 lib path
+# 2. "Cannot open include file 'SDL2/SDL.h'" - Check INCLUDE environment variable
+# 3. "LNK1104: cannot open file 'SDL2.lib'" - Verify SDL2 installation and paths
+# 4. 32-bit vs 64-bit mismatch - Use x64 libraries for 64-bit builds
+
+# Alternative: Use vcpkg for SDL2
+# vcpkg install sdl2
+# Then use vcpkg paths in INCLUDE/LIB
+
+# For optimization:
+# g++ -O3 main.cpp cpu.cpp memory.cpp gpu.cpp input.cpp -o gameboy.exe -lSDL2

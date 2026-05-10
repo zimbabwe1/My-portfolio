@@ -1,0 +1,71 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Game Boy Emulator",
+			"type": "shell",
+			"command": "g++",
+			"args": [
+				"-O3",
+				"gameboy-emulator/main.cpp",
+				"gameboy-emulator/cpu.cpp",
+				"gameboy-emulator/memory.cpp",
+				"gameboy-emulator/gpu.cpp",
+				"gameboy-emulator/input.cpp",
+				"-o",
+				"gameboy-emulator/gameboy.exe",
+				"-lSDL3"
+			]
+		},
+		{
+			"label": "Build Game Boy Emulator MSYS2",
+			"type": "shell",
+			"command": "C:\\msys64\\msys2_shell.cmd",
+			"args": [
+				"-mingw64",
+				"-c",
+				"cd /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator && g++ -O3 main.cpp cpu.cpp memory.cpp gpu.cpp input.cpp -o gameboy.exe -lSDL3"
+			]
+		},
+		{
+			"label": "Check SDL3",
+			"type": "shell",
+			"command": "C:\\msys64\\msys2_shell.cmd",
+			"args": [
+				"-mingw64",
+				"-c",
+				"pacman -Q mingw-w64-x86_64-SDL3"
+			]
+		},
+		{
+			"label": "Install SDL3",
+			"type": "shell",
+			"command": "C:\\msys64\\msys2_shell.cmd",
+			"args": [
+				"-mingw64",
+				"-c",
+				"pacman -S mingw-w64-x86_64-SDL3 --noconfirm"
+			]
+		},
+		{
+			"label": "Update and Install SDL3",
+			"type": "shell",
+			"command": "C:\\msys64\\msys2_shell.cmd",
+			"args": [
+				"-mingw64",
+				"-c",
+				"pacman -Syu --noconfirm && pacman -S mingw-w64-x86_64-SDL3 --noconfirm"
+			]
+		},
+		{
+			"label": "Build with absolute paths",
+			"type": "shell",
+			"command": "C:\\msys64\\msys2_shell.cmd",
+			"args": [
+				"-mingw64",
+				"-c",
+				"g++ -O3 /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/main.cpp /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/cpu.cpp /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/memory.cpp /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/gpu.cpp /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/input.cpp -o /c/Users/PopSo/Desktop/My-portfolio/gameboy-emulator/gameboy.exe -lSDL3"
+			]
+		}
+	]
+}
